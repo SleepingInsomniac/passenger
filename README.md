@@ -61,6 +61,7 @@ set :passenger_restart_with_sudo, false
 set :passenger_environment_variables, {}
 set :passenger_restart_command, 'passenger-config restart-app'
 set :passenger_restart_options, -> { "#{deploy_to} --ignore-app-not-running" }
+set :passenger_version, nil # Automatically detected with passenger -v unless set
 ```
 
 ### Restarting Your Passenger Application

@@ -17,7 +17,10 @@ namespace :passenger do
             # Phusion Passenger Enterprise version x.x.x
             # Phusion Passenger x.x.x
             # Phusion Passenger Enterprise x.x.x
-            passenger_version = capture(:passenger, '-v').match(/^Phusion Passenger (Enterprise )?(version )?(.*)$/)[3]
+            # Phusion Passenger(R) x.x.x
+            passenger_version = fetch(:passenger_version, nil)
+            version_match = capture(:passenger, '-v').match(/Phusion Passenger[^\d]+((?:\d+\.)+\d)/)
+            passenger_version ||= version_match[1] if version_match
             restart_with_touch = Gem::Version.new(passenger_version) < Gem::Version.new('4.0.33')
           end
 
